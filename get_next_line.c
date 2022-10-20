@@ -6,10 +6,16 @@
 /*   By: mamedeir <mamedeir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 16:21:36 by mamedeir          #+#    #+#             */
-/*   Updated: 2022/10/20 18:26:46 by mamedeir         ###   ########.fr       */
+/*   Updated: 2022/10/20 15:23:45 by mamedeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
+
+char	*ft_cat_line(char *save)
+{
+
+}
 
 
 
