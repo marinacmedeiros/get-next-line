@@ -6,7 +6,9 @@
 /*   By: mamedeir <mamedeir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 16:21:32 by mamedeir          #+#    #+#             */
-/*   Updated: 2022/10/15 16:23:24 by mamedeir         ###   ########.fr       */
+/*   Updated: 2022/10/20 18:24:23 by mamedeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "get_next_line.h"
 
