@@ -6,7 +6,7 @@
 /*   By: mamedeir <mamedeir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 16:21:36 by mamedeir          #+#    #+#             */
-/*   Updated: 2022/10/21 16:35:37 by mamedeir         ###   ########.fr       */
+/*   Updated: 2022/10/21 16:49:46 by mamedeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ char	*get_next_line(int fd)
 	store = ft_read_and_save(fd, store);
 	if (!store)
 		return (NULL);
-	line = ft_get_line(store);
+	line = ft_catch_line(store);
 	store = ft_save(store);
 	return (line);
 }
