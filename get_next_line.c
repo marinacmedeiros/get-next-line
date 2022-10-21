@@ -6,7 +6,7 @@
 /*   By: mamedeir <mamedeir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 16:21:36 by mamedeir          #+#    #+#             */
-/*   Updated: 2022/10/21 16:49:46 by mamedeir         ###   ########.fr       */
+/*   Updated: 2022/10/21 19:34:28 by mamedeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ char	*ft_save(char *store)
 	i = 0;
 	while (store[i] && store[i] != '\n')
 		i++;
-	if (!store[i])
-	{
-		free(store);
-		return (NULL);
-	}
+    if ((store[i] == '\n' && store[i + 1] == '\0') || !store[i])
+    {
+        free (store);
+        return (NULL);
+    }
 	s = (char *)malloc(sizeof(char) * (ft_strlen(store) - i + 1));
 	if (!s)
 		return (NULL);
@@ -75,18 +75,17 @@ char	*ft_read_and_save(int fd, char *store)
 	if (!buff)
 		return (NULL);
 	read_bytes = 1;
-	while (!ft_strchr(store, '\n') && read_bytes != 0)
+	while (!ft_strchr(store, '\n'))
 	{
 		read_bytes = read(fd, buff, BUFFER_SIZE);
-		if (read_bytes == -1)
-		{
-			free(buff);
-			return (NULL);
-		}
+		if (read_bytes <= 0)
+			break ;
 		buff[read_bytes] = '\0';
 		store = ft_strjoin(store, buff);
 	}
 	free(buff);
+	if (read_bytes == -1)
+		return (NULL);
 	return (store);
 }
 

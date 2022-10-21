@@ -6,7 +6,7 @@
 /*   By: mamedeir <mamedeir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 16:21:32 by mamedeir          #+#    #+#             */
-/*   Updated: 2022/10/20 15:02:50 by mamedeir         ###   ########.fr       */
+/*   Updated: 2022/10/21 19:21:21 by mamedeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,6 @@ char	*ft_strjoin(const char *s1, const char *s2)
 		i++;
 	}
 	result[len] = '\0';
+	free ((char *)s1);
 	return (result);
 }
