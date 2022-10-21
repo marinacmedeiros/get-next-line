@@ -40,7 +40,20 @@ char	*ft_cat_line(char *save)
 	return (s);
 }
 
+/*
+1° - Quero pegar a linha e incluir as possibilidades dela existir, como quando não existir, quando existir sem a quebra de linha (a partir daqui já faz a malocagem) e quando houver a quebra de linha
+
+2° - salvar o que peguei na função anterior
+
+3° - ler e salvar, utilizando o buffer
+
+4° - por último fazemos o gnl em si
+
+*/
+
+
+
 char	*get_next_line(int fd)
 {
-	int	c;
+
 }
