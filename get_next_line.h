@@ -6,7 +6,7 @@
 /*   By: mamedeir <mamedeir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 16:21:40 by mamedeir          #+#    #+#             */
-/*   Updated: 2022/10/20 15:12:12 by mamedeir         ###   ########.fr       */
+/*   Updated: 2022/10/21 16:35:44 by mamedeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,9 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strjoin(const char *s1, const char *s2);
 /*Allocates (with malloc(3)) and returns a new string, 
  which is the result of the concatenation of ’s1’ and ’s2’.*/
+char	*ft_catch_line(char *store);
+char	*ft_save(char *store);
+char	*ft_read_and_save(int fd, char *store);
+char	*get_next_line(int fd);
 
 #endif
