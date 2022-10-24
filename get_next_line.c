@@ -6,11 +6,51 @@
 /*   By: mamedeir <mamedeir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 16:21:36 by mamedeir          #+#    #+#             */
-/*   Updated: 2022/10/21 19:34:28 by mamedeir         ###   ########.fr       */
+/*   Updated: 2022/10/24 12:54:26 by mamedeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*get_next_line(int fd)
+{
+	static char	*str;
+	char		*line;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	str = ft_read(fd, str);
+	if (!str)
+		return (NULL);
+	line = ft_catch_line(str);
+	if (!line)
+		return (NULL);
+	str = ft_save(str);
+	return (line);
+}
+
+char	*ft_read(int fd, char *store)
+{
+	char	*buffer;
+	ssize_t	read_bytes;
+
+	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer)
+		return (NULL);
+	read_bytes = 1;
+	while (!ft_strchr(store, '\n'))
+	{
+		read_bytes = read(fd, buffer, BUFFER_SIZE);
+		if (read_bytes <= 0)
+			break ;
+		buffer[read_bytes] = '\0';
+		store = ft_strjoin(store, buffer);
+	}
+	free(buffer);
+	if (read_bytes == -1)
+		return (NULL);
+	return (store);
+}
 
 char	*ft_catch_line(char *store)
 {
@@ -18,13 +58,14 @@ char	*ft_catch_line(char *store)
 	char	*s;
 
 	i = 0;
+	/* s = ""; */
 	if (!store[i])
 		return (NULL);
 	while (store[i] && store[i] != '\n')
 		i++;
 	s = (char *)malloc(sizeof(char) * (i + 2));
 	if (!s)
-		return (NULL);
+		return (0);
 	i = 0;
 	while (store[i] && store[i] != '\n')
 	{
@@ -49,14 +90,14 @@ char	*ft_save(char *store)
 	i = 0;
 	while (store[i] && store[i] != '\n')
 		i++;
-    if ((store[i] == '\n' && store[i + 1] == '\0') || !store[i])
-    {
-        free (store);
-        return (NULL);
-    }
+	if ((store[i] == '\n' && store[i + 1] == '\0') || !store[i])
+	{
+		free (store);
+		return (NULL);
+	}
 	s = (char *)malloc(sizeof(char) * (ft_strlen(store) - i + 1));
 	if (!s)
-		return (NULL);
+		return (0);
 	i++;
 	j = 0;
 	while (store[i])
@@ -65,51 +106,3 @@ char	*ft_save(char *store)
 	free(store);
 	return (s);
 }
-
-char	*ft_read_and_save(int fd, char *store)
-{
-	char	*buff;
-	int		read_bytes;
-
-	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buff)
-		return (NULL);
-	read_bytes = 1;
-	while (!ft_strchr(store, '\n'))
-	{
-		read_bytes = read(fd, buff, BUFFER_SIZE);
-		if (read_bytes <= 0)
-			break ;
-		buff[read_bytes] = '\0';
-		store = ft_strjoin(store, buff);
-	}
-	free(buff);
-	if (read_bytes == -1)
-		return (NULL);
-	return (store);
-}
-
-char	*get_next_line(int fd)
-{
-	char		*line;
-	static char	*store;
-
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (0);
-	store = ft_read_and_save(fd, store);
-	if (!store)
-		return (NULL);
-	line = ft_catch_line(store);
-	store = ft_save(store);
-	return (line);
-}
-
-/*1° - Quero pegar a linha e incluir as possibilidades dela existir,
-como quando não existir, quando existir sem a quebra de linha 
-(a partir daqui já faz a malocagem) e quando houver a quebra de linha
-
-2° - salvar o que peguei na função anterior
-
-3° - ler e salvar, utilizando o buffer
-
-4° - por último fazemos o gnl em si*/

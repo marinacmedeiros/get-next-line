@@ -6,7 +6,7 @@
 /*   By: mamedeir <mamedeir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 16:21:32 by mamedeir          #+#    #+#             */
-/*   Updated: 2022/10/21 19:21:21 by mamedeir         ###   ########.fr       */
+/*   Updated: 2022/10/24 12:47:07 by mamedeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,52 +14,52 @@
 
 size_t	ft_strlen(const char *str)
 {
-	size_t	a;
+	size_t	i;
 
-	a = 0;
-	while (str[a] != '\0')
-		a++;
-	return (a);
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
 }
 
 char	*ft_strchr(const char *s, int c)
 {
-	while ((*s != '\0') && (*s != (unsigned char)c))
+	char	ptr;
+
+	ptr = c;
+	if (!s)
+		return (NULL);
+	while (*s != ptr)
 	{
+		if (*s == '\0')
+			return (NULL);
 		s++;
 	}
-	if (*s == (unsigned char)c)
-	{
-		return ((char *)s);
-	}
-	return (0);
+	return ((char *)s);
 }
 
 char	*ft_strjoin(const char *s1, const char *s2)
 {
-	char	*result;
-	size_t	i;
-	size_t	len;
+	int		i;
+	char	*p;
+	int		len1;
+	int		len2;
 
-	if (!s1 || !s2)
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	p = (char *)malloc(len1 + len2 + 1);
+	if (!p)
 		return (NULL);
-	len = ft_strlen(s1) + ft_strlen(s2);
-	i = 0;
-	result = (char *) malloc ((len + 1) * sizeof(char));
-	if (result == NULL)
-		return (NULL);
-	while (i < ft_strlen(s1))
+	i = -1;
+	while (s1 && s1[++i])
+		p[i] = s1[i];
+	i = -1;
+	while (s2 && s2[++i])
 	{
-		result[i] = s1[i];
-		i++;
-	}	
-	i = 0;
-	while (i < ft_strlen(s2))
-	{
-		result[ft_strlen(s1) + i] = s2[i];
-		i++;
+		p[len1] = s2[i];
+		len1++;
 	}
-	result[len] = '\0';
+	p[len1] = '\0';
 	free ((char *)s1);
-	return (result);
+	return (p);
 }
