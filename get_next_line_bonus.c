@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mamedeir <mamedeir@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 16:21:36 by mamedeir          #+#    #+#             */
-/*   Updated: 2022/10/24 15:03:55 by mamedeir         ###   ########.fr       */
+/*   Created: 2022/10/24 15:20:24 by mamedeir          #+#    #+#             */
+/*   Updated: 2022/10/24 15:40:56 by mamedeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*get_next_line(int fd)
 {
-	static char	*str;
+	static char	*str[1024];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	str = ft_read(fd, str);
-	if (!str)
+	str[fd] = ft_read(fd, str[fd]);
+	if (!str[fd])
 		return (NULL);
-	line = ft_catch_line(str);
+	line = ft_catch_line(str[fd]);
 	if (!line)
 		return (NULL);
-	str = ft_save(str);
+	str[fd] = ft_save(str[fd]);
 	return (line);
 }
 
